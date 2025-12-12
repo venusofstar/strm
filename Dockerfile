@@ -1,12 +1,15 @@
-FROM php:8.2-cli-alpine
+FROM alpine:latest
 
 WORKDIR /app
 
-# Copy your DRM restream script
-COPY o11_v22b1-DRMStuff.php /app/o11_v22b1-DRMStuff.php
+# Copy your file exactly as-is
+COPY o11_v22b1-DRMStuff /app/o11_v22b1-DRMStuff
 
-# Expose port
+# Make it executable
+RUN chmod +x /app/o11_v22b1-DRMStuff
+
+# Expose default port (optional – change if needed)
 EXPOSE 8080
 
-# Run your DRM script as main router
-CMD ["php", "-S", "0.0.0.0:8080", "/app/o11_v22b1-DRMStuff.php"]
+# Run your binary/script
+CMD ["/app/o11_v22b1-DRMStuff"]
